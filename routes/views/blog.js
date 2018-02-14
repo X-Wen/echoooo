@@ -15,10 +15,8 @@ exports = module.exports = function (req, res) {
 		posts: [],
 		categories: [],
 	};
-
 	// Load all categories
 	view.on('init', function (next) {
-
 		keystone.list('PostCategory').model.find().sort('name').exec(function (err, results) {
 
 			if (err || !results.length) {
@@ -43,7 +41,6 @@ exports = module.exports = function (req, res) {
 
 	// Load the current category filter
 	view.on('init', function (next) {
-
 		if (req.params.category) {
 			keystone.list('PostCategory').model.findOne({ key: locals.filters.category }).exec(function (err, result) {
 				locals.data.category = result;
@@ -56,7 +53,6 @@ exports = module.exports = function (req, res) {
 
 	// Load the posts
 	view.on('init', function (next) {
-
 		var q = keystone.list('Post').paginate({
 			page: req.query.page || 1,
 			perPage: 10,
@@ -77,7 +73,6 @@ exports = module.exports = function (req, res) {
 			next(err);
 		});
 	});
-
 	// Render the view
 	view.render('blog');
 };
