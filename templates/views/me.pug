@@ -1,0 +1,46 @@
+extends ../layouts/default
+
+block intro
+
+block content
+	.container-sm
+		.page-intro
+			p.lead Hi #{user.name.first}, these are your settings and 
+				a(href=user.url) profile details
+			//- if nextMeetup
+				.alert.alert-info 
+					span.entypo.entypo-calendar
+					|  The next meetup has been announced - 
+					a(href=nextMeetup.url).alert-link= nextMeetup._.startDate.format('dddd D MMM YYYY')
+		.page-content.tile.ph-2.pv-2.mb-2
+			+flash-messages(messages)
+			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal
+				input(type='hidden', name='action', value='profile.details')
+				h3 Private Info
+				.form-group
+					label.col-sm-2.control-label Name
+					.col-sm-10: .form-row
+						.col-xs-6: input(type='text', name='name.first' value=user.name.first).form-control
+						.col-xs-6: input(type='text', name='name.last' value=user.name.last).form-control
+				.form-group
+					label.col-sm-2.control-label Email
+					.col-sm-10: input(type='email', name='email' value=user.email).form-control
+				
+		.ui-reveal
+			.ui-reveal__initial
+				button(type='button').btn.btn-link.ui-reveal__trigger Change Password
+			.ui-reveal__hidden
+				form(method='post', autocomplete='off')
+					input(type='hidden', name='action', value='profile.password')
+					h3 Change password
+					.form-group
+						label(for='change-passwordNew').sr-only New Password
+						input(type='password', name='password', placeholder='New Password', id='change-passwordNew').form-control
+					.form-group
+						label(for='change-passwordConfirm').sr-only Confirm Password
+						input(type='password', name='password_confirm', placeholder='Confirm Password', id='signin-passwordConfirm').form-control
+					.form-group
+						button(type='submit', data-loading-text="Changing...").btn.btn-primary Change
+							
+block js
+	script(src='/js/views/me.js')

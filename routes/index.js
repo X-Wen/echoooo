@@ -49,6 +49,12 @@ exports = module.exports = function (app) {
 	app.all('/forgot-password', routes.views.session['forgot-password']);
 	app.all('/reset-password/:key', routes.views.session['reset-password']);
 
+	// User
+//	app.all('/me*', middleware.requireUser);
+	app.all('/me', routes.views.me);
+//	app.all('/me/create/post', routes.views.createPost);
+//	app.all('/me/create/link', routes.views.createLink);
+
 	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
 	// app.get('/protected', middleware.requireUser, routes.views.protected);
 
