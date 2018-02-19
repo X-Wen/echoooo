@@ -9,6 +9,7 @@
     "keystone-email": "1.0.5",
     "lodash": "^4.13.1",
     "marked": "^0.3.14",
+    "mediaelement": "^4.2.8",
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {

@@ -1,5 +1,10 @@
 extends ../layouts/default
 
 block content
-	.container: .jumbotron
-		h1  欢迎!
+      .container: .jumbotron
+            h1  欢迎!
+            div(class="media-wrapper")
+                  audio(src="/res/secret_love_by_voice_toy.mp3"
+                        class="mejs__player"
+                        type="audio/mp3"
+			 width="100%" height="200" controls="controls" preload="auto")
