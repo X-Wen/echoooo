@@ -21,10 +21,10 @@ exports = module.exports = function(req, res) {
 			});
 		
 		// automatically publish posts by admin users
-		if (locals.user.isAdmin) {
+//		if (locals.user.isAdmin) {
 			newPost.state = 'published';
-		}
-		
+//		}
+
 		updater.process(req.body, {
 			flashErrors: true,
 			logErrors: true,
@@ -33,7 +33,7 @@ exports = module.exports = function(req, res) {
 			if (err) {
 				locals.validationErrors = err.errors;
 			} else {
-				newPost.notifyAdmins();
+			        //newPost.notifyAdmins();
 				req.flash('success', 'Your post has been added' + ((newPost.state == 'draft') ? ' and will appear on the site once it\'s been approved' : '') + '.');
 				return res.redirect('/pieces/post/' + newPost.slug);
 			}
