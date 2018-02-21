@@ -1,0 +1,38 @@
+#!/usr/bin/expect
+
+if {$argc < 5} {
+    #do something
+    send_user "usage: $argv0 <remote_user> <remote_host> <remote_port> <remote_pwd> <remote_root_pwd> <local_filename> <remote_filename> <remote_processdir>"
+    exit
+}
+
+set timeout -1
+set remote_user [lindex $argv 0]
+set remote_host [lindex $argv 1]
+set remote_port [lindex $argv 2]
+set remote_pwd [lindex $argv 3]
+set remote_root_pwd [lindex $argv 4]
+set local_filename [lindex $argv 5]
+set remote_filename [lindex $argv 6]
+set remote_processdir [lindex $argv 7]
+
+spawn scp -P $remote_port $local_filename $remote_user@$remote_host:~/${remote_filename}
+expect {
+    "(yes/no)?" {
+	send "yes\r"
+	expect "*assword:" { send "${remote_pwd}\r"}
+    }
+    "*assword:" {
+	send "${remote_pwd}\r"
+    }
+}
+expect "100%"
+expect eof  
+
+spawn ssh -p ${remote_port} ${remote_user}@${remote_host}
+expect "*assword:" {send "${remote_pwd}\r"}
+expect "Last login:" {send "tar xvf ${remote_filename};cd ${remote_processdir};sudo forever restart keystone.js\r"}
+expect "*password*" {send "${remote_pwd}\r"}
+
+expect "*Forever restarted process*" {send "exit\r"}
+expect eof
