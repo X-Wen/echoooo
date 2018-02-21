@@ -1,10 +1,16 @@
 extends ../layouts/default
 
+block css
+      link(href="/styles/mediaelement/mediaelementplayer.min.css", rel="stylesheet")
+
 block content
       .container: .jumbotron
             h1  欢迎!
             div(class="media-wrapper")
-                  audio(src="/res/secret_love_by_voice_toy.mp3"
+                  audio(src="/res/Cela.mp3"
                         class="mejs__player"
                         type="audio/mp3"
-			 width="100%" height="200" controls="controls" preload="auto")
+			 controls preload="auto")
+
+block js
+      script(src='/js/mediaelement/mediaelement-and-player.min.js')
