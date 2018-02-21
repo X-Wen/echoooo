@@ -23,6 +23,9 @@ mixin post(post)
 			p.read-more: a(href='/pieces/post/' + post.slug) Read more...
 
 block intro
+	.page-header
+		if user
+			a(href='/me/create/post').btn.btn-default.pull-right= user ? 'Write Post' : 'Sign in to Write Post'
 	.container
 		h1= data.category ? data.category.name : 'Pieces'
 
