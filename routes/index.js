@@ -38,7 +38,6 @@ exports = module.exports = function (app) {
 	app.get('/', routes.views.index);
 	app.get('/pieces/:category?', routes.views.pieces);
 	app.get('/pieces/post/:post', routes.views.post);
-	app.get('/gallery', routes.views.gallery);
 	app.all('/contact', routes.views.contact);
 
 	// Session

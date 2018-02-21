@@ -14,6 +14,7 @@ remote_pwd=$4
 remote_root_pwd=$5
 
 fis3 release -d ../echoooo_output
+cp .env ../echoooo_output
 cd ..
 tar cjf echoooo_output.tar.bz2 echoooo_output
 cd -
